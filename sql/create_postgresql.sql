@@ -1,11 +1,11 @@
 /* ---------------------------------------------------------------------- */
 /* Script generated with: DeZign for Databases 12.4.2                     */
 /* Target DBMS:           PostgreSQL 12                                   */
-/* Project file:          Project1.dez                                    */
-/* Project name:                                                          */
-/* Author:                                                                */
+/* Project file:          DSA.dez                                         */
+/* Project name:          DSA                                             */
+/* Author:                riggedCoinflip                                  */
 /* Script type:           Database creation script                        */
-/* Created on:            2021-11-14 15:27                                */
+/* Created on:            2021-11-15 14:39                                */
 /* ---------------------------------------------------------------------- */
 
 
@@ -14,29 +14,11 @@
 /* ---------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------- */
-/* Add table "Charakter"                                                  */
-/* ---------------------------------------------------------------------- */
-
-
-
-CREATE TABLE Charakter (
-    charakter_id SERIAL  NOT NULL,
-    name CHARACTER(60),
-    gewicht SMALLINT,
-    PRIMARY KEY (charakter_id)
-);
-
-
-
-/* ---------------------------------------------------------------------- */
 /* Add table "Eigenschaften"                                              */
 /* ---------------------------------------------------------------------- */
 
-
-
 CREATE TABLE Eigenschaften (
     eigenschaften_id SERIAL  NOT NULL,
-    charakter_id SERIAL  NOT NULL,
     mu SMALLINT  NOT NULL,
     kl SMALLINT  NOT NULL,
     in_ SMALLINT  NOT NULL,
@@ -47,8 +29,6 @@ CREATE TABLE Eigenschaften (
     kk SMALLINT  NOT NULL,
     CONSTRAINT PK_Eigenschaften PRIMARY KEY (eigenschaften_id)
 );
-
-
 
 COMMENT ON COLUMN Eigenschaften.mu IS 'Mut';
 
@@ -67,8 +47,24 @@ COMMENT ON COLUMN Eigenschaften.ko IS 'Konstitution';
 COMMENT ON COLUMN Eigenschaften.kk IS 'Körperkraft';
 
 /* ---------------------------------------------------------------------- */
+/* Add table "Charaktere"                                                 */
+/* ---------------------------------------------------------------------- */
+
+
+
+CREATE TABLE Charaktere (
+    charaktere_id SERIAL  NOT NULL,
+    name CHARACTER(60),
+    gewicht SMALLINT,
+    eigenschaften_id INTEGER  NOT NULL,
+    PRIMARY KEY (charaktere_id)
+);
+
+
+
+/* ---------------------------------------------------------------------- */
 /* Add foreign key constraints                                            */
 /* ---------------------------------------------------------------------- */
 
-ALTER TABLE Eigenschaften ADD CONSTRAINT Charakter_Eigenschaften 
-    FOREIGN KEY (charakter_id) REFERENCES Charakter (charakter_id) ON DELETE CASCADE;
+ALTER TABLE Charaktere ADD CONSTRAINT Eigenschaften_Charaktere 
+    FOREIGN KEY (eigenschaften_id) REFERENCES Eigenschaften (eigenschaften_id);
