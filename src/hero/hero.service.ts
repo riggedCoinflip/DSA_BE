@@ -1,19 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Charakter } from './charaktere.model';
+
+class Charakter {
+    constructor(
+        public name: string,
+        public gewicht: number,
+        public eigenschaften_id: number
+    ) {}
+}
 
 @Injectable()
 export class CharaktereService {
+    
     charaktere: Charakter[] = [];
-
-    /*
-insertCharakter(charakter: Charakter) {
-
-    }
-    */
 
     createOne(name: string, gewicht: number, eigenschaften_id: number) {
         const newCharakter = new Charakter(name, gewicht, eigenschaften_id);
-        this.charaktere.push(newCharakter);
+        
         return 'wololo';
     }
 

@@ -1,24 +1,20 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
-import { CharaktereService } from './charaktere.service';
+import { CharaktereService } from './hero.service';
 
-interface someJSON {
-    foo?: string;
-}
-
-@Controller('/charaktere')
-export class CharaktereController {
-    constructor(private readonly charakterService: CharaktereService) {}
+@Controller('/hero')
+export class HeroController {
+    constructor(private readonly heroService: CharaktereService) {}
 
     @Post()
     createOne(
-        @Body('name') charakterName: string,
+        @Body('name') heroName: string,
         @Body('gewicht') charakterGewicht: number,
-        @Body('eigenschaften_id') charakterEigenschaften_id: number
+        @Body('eigenschaften_id') heroEigenschaften_id: number
     ) {
-        const someText = this.charakterService.createOne(
-            charakterName,
+        const someText = this.heroService.createOne(
+            heroName,
             charakterGewicht,
-            charakterEigenschaften_id
+            heroEigenschaften_id
         );
 
         if (false) {
@@ -29,12 +25,12 @@ export class CharaktereController {
 
     @Get()
     findMany() {
-        return this.charakterService.findMany();
+        return this.heroService.findMany();
     }
 
     @Get(':id')
     findOne(@Param('id') charakterId: number) {
-        return this.charakterService.findOne(charakterId);
+        return this.heroService.findOne(charakterId);
     }
 
     @Patch(':id')
@@ -44,11 +40,11 @@ export class CharaktereController {
         @Body('gewicht') charakterGewicht: number,
         @Body('eigenschaften_id') charakterEigenschaften_id: number
     ) {
-        return this.charakterService.updateOne(charakterId);
+        return this.heroService.updateOne(charakterId);
     }
 
     @Delete(':id')
     deleteOne(@Param('id') charakterId: number) {
-        return this.charakterService.deleteOne(charakterId);
+        return this.heroService.deleteOne(charakterId);
     }
 }
