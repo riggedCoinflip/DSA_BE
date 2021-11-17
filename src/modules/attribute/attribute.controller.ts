@@ -1,9 +1,9 @@
-import { Prisma } from ".prisma/client";
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { AttributesService } from "./attribute.service";
-import { CreateAttributeDto } from "./dto/create-attribute.dto";
+import { Prisma } from '.prisma/client';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { AttributesService } from './attribute.service';
+import { CreateAttributeDto } from './dto/create-attribute.dto';
 
-@Controller('attributes')
+@Controller('attribute')
 export class AttributesController {
     constructor(private readonly attributeService: AttributesService) {}
 
