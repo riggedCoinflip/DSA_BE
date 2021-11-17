@@ -1,41 +1,20 @@
-import { Injectable } from '@nestjs/common';
-
-class Charakter {
-    constructor(
-        public name: string,
-        public gewicht: number,
-        public eigenschaften_id: number
-    ) {}
-}
+import { Body, Get, Injectable, Param, Post } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class HeroService {
-    
-    charaktere: Charakter[] = [];
+    constructor(private readonly prisma: PrismaService) {}
 
-    createOne(name: string, gewicht: number, eigenschaften_id: number) {
-        const newCharakter = new Charakter(name, gewicht, eigenschaften_id);
-        
-        return 'wololo';
+    async create(data: Prisma.HeroCreateArgs) {
+        return await this.prisma.hero.create(data);
     }
 
-    findMany() {
-        const allCharaktere = [
-            { name: 'A', gewicht: 1, eigenschaften_id: 2 },
-            { name: 'B', gewicht: 2, eigenschaften_id: 3 },
-        ];
-        return allCharaktere;
+    async findMany(data: Prisma.HeroFindManyArgs) {
+        return await this.prisma.hero.findMany(data);
     }
 
-    findOne(id: number) {
-        return { name: 'B', gewicht: 2, eigenschaften_id: 3 };
-    }
-
-    updateOne(id: number) {
-        return { updated: true };
-    }
-
-    deleteOne(id: number) {
-        return { deleted: true };
+    async findUnique(data: Prisma.HeroFindUniqueArgs) {
+        return await this.prisma.hero.findUnique(data);
     }
 }

@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Injectable, Param, Post } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { CreateHeroDto } from './dto/create-hero.dto';
 import { HeroService } from './hero.service';
 
 @Controller('hero')
@@ -6,45 +8,29 @@ export class HeroController {
     constructor(private readonly heroService: HeroService) {}
 
     @Post()
-    createOne(
-        @Body('name') heroName: string,
-        @Body('gewicht') charakterGewicht: number,
-        @Body('eigenschaften_id') heroEigenschaften_id: number
-    ) {
-        const someText = this.heroService.createOne(
-            heroName,
-            charakterGewicht,
-            heroEigenschaften_id
-        );
-
-        if (false) {
-            throw new NotFoundException();
-        }
-        return { text: someText };
+    async create(@Body() data: CreateHeroDto) {
+        const dto: Prisma.HeroCreateArgs = {
+            data: {
+                name: data.name,
+                attributeId: data.attributeId,
+            },
+        };
+        return await this.heroService.create(dto);
     }
 
     @Get()
-    findMany() {
-        return this.heroService.findMany();
+    async findAll() {
+        const dto: Prisma.HeroFindManyArgs = {
+            where: {},
+        };
+        return await this.heroService.findMany(dto);
     }
 
     @Get(':id')
-    findOne(@Param('id') charakterId: number) {
-        return this.heroService.findOne(charakterId);
-    }
-
-    @Patch(':id')
-    updateOne(
-        @Param('id') charakterId: number,
-        @Body('name') charakterName: string,
-        @Body('gewicht') charakterGewicht: number,
-        @Body('eigenschaften_id') charakterEigenschaften_id: number
-    ) {
-        return this.heroService.updateOne(charakterId);
-    }
-
-    @Delete(':id')
-    deleteOne(@Param('id') charakterId: number) {
-        return this.heroService.deleteOne(charakterId);
+    async findOne(@Param('id') id: string) {
+        const dto: Prisma.HeroFindUniqueArgs = {
+            where: { id: +id },
+        };
+        return await this.heroService.findUnique(dto);
     }
 }
