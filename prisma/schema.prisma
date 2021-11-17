@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+/// DE: Charakter/Held
+model Hero {
+  id          Int       @id @default(autoincrement())
+  name        String?
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+  attributeId Int
+}
+
+/// DE: Eigenschaften
+model Attribute {
+  id   Int    @id @default(autoincrement())
+  /// courage | DE: MU/Mut
+  cou  Int @default(8)
+  /// sagacity | DE: KL/Klugheit
+  sgc  Int @default(8)
+  /// intuition | DE: IN/Intuition
+  int  Int @default(8)
+  /// charisma | DE: CH/Charisma
+  cha  Int @default(8)
+  /// dexterity | DE: FF/Finderfertigkeit
+  dex  Int @default(8)
+  /// agility | DE: GE/Gewandheit
+  agi  Int @default(8)
+  /// constitution | DE: KO/Konstitution
+  con  Int @default(8)
+  /// strength | DE: KK/Körperkraft
+  str  Int @default(8)
+  Hero Hero?
+}
