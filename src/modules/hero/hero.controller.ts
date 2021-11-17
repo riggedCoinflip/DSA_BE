@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
-import { CharaktereService } from './hero.service';
+import { HeroService } from './hero.service';
 
-@Controller('/hero')
+@Controller('hero')
 export class HeroController {
-    constructor(private readonly heroService: CharaktereService) {}
+    constructor(private readonly heroService: HeroService) {}
 
     @Post()
     createOne(

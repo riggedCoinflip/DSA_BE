@@ -9,7 +9,7 @@ class Charakter {
 }
 
 @Injectable()
-export class CharaktereService {
+export class HeroService {
     
     charaktere: Charakter[] = [];
 
