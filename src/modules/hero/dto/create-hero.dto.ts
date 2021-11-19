@@ -1,4 +1,8 @@
+import {CreateAttributeDto} from '../attribute/dto/create-attribute.dto';
+
 export class CreateHeroDto {
-  name: string;
-  attributeId: number;
+  data: {
+    name: string;
+    attribute: CreateAttributeDto;
+  };
 }

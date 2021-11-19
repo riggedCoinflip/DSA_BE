@@ -8,11 +8,25 @@ export class HeroController {
     constructor(private readonly heroService: HeroService) {}
 
     @Post()
-    async create(@Body() data: CreateHeroDto) {
+    async create(@Body() d: CreateHeroDto) {
+        const name = d.data.name;
+        const attribute = {
+          cou: d.data.attribute.cou,
+          sgc: d.data.attribute.sgc,
+          int: d.data.attribute.int,
+          cha: d.data.attribute.cha,
+          dex: d.data.attribute.dex,
+          agi: d.data.attribute.agi,
+          con: d.data.attribute.con,
+          str: d.data.attribute.str,
+        };
+
         const dto: Prisma.HeroCreateArgs = {
             data: {
-                name: data.name,
-                attributeId: data.attributeId,
+                data: {
+                    name,
+                    attribute,
+                }
             },
         };
         return await this.heroService.create(dto);
