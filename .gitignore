@@ -36,6 +36,3 @@ lerna-debug.log*
 
 # credentials
 .env
-
-# Local History extension files
-*.history
