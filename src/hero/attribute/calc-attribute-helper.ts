@@ -1,3 +1,4 @@
+/*
 import {calcApAttribute, prefixAp} from '@riggedcoinflip/dsa-shared';
 import {CreateAttributeDto} from './dto/attribute.dto';
 
@@ -44,3 +45,4 @@ const calcAllAttribute = (baseAttribute: CreateAttributeDto) => {
   };
   return attributeCalculatedValues;
 };
+*/
