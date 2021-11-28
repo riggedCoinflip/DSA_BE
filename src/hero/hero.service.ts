@@ -38,30 +38,32 @@ export class HeroService {
     return this.heroModel.find().exec();
   }
 
-  async updateOne(id: string, dto: HeroDto): Promise<Hero> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new BadRequestException(
-        'Malformed ObjectID - has to be 24 hexadecimal chars',
-      );
+  async updateOne(id: string, data: HeroDto): Promise<Hero> {
+    let hero;
+    try {
+      hero = await this.heroModel
+        .findByIdAndUpdate(id, data, {
+          new: true,
+        })
+        .exec();
+    } catch (e) {
+      throw new NotFoundException();
     }
-    const hero = await this.heroModel.findByIdAndUpdate(id, dto, {
-      new: true,
-    });
     if (!hero) {
-      throw new NotFoundException('Could not find hero.');
+      throw new NotFoundException();
     }
     return hero;
   }
 
   async deleteOne(id: string): Promise<Hero> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new BadRequestException(
-        'Malformed ObjectID - has to be 24 hexadecimal chars',
-      );
+    let hero;
+    try {
+      hero = await this.heroModel.findByIdAndDelete(id).exec();
+    } catch (e) {
+      throw new NotFoundException();
     }
-    const hero = await this.heroModel.findByIdAndDelete(id);
     if (!hero) {
-      throw new NotFoundException('Could not find hero.');
+      throw new NotFoundException();
     }
     return hero;
   }

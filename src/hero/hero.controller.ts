@@ -31,7 +31,7 @@ export class HeroController {
   }
 
   @Patch(':id')
-  async updateOne(@Param('id') id: string, @Body() dto: HeroDto) {
+  async updateOne(@Param('id') id: string, @Body() dto: HeroDto): Promise<Hero> {
     return this.heroService.updateOne(id, dto);
   }
 

@@ -6,18 +6,7 @@ import {HeroService} from './hero.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeatureAsync([
-      {
-        name: HeroSchemaName,
-        useFactory: () => {
-          const schema = HeroSchema;
-          schema.pre('save', function () {
-            console.log('Hello from pre save');
-          });
-          return schema;
-        },
-      },
-    ]),
+    MongooseModule.forFeature([{name: HeroSchemaName, schema: HeroSchema}]),
   ],
   controllers: [HeroController],
   providers: [HeroService],

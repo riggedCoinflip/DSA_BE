@@ -1,23 +1,44 @@
 import {Schema} from 'mongoose';
-import { SingleAttributeSchema } from '../single-attribute/schemas/single-attribute.schema';
+import {SingleAttribute} from '../single-attribute/interfaces/single-attribute.interface';
+import {SingleAttributeSchema} from '../single-attribute/schemas/single-attribute.schema';
 
-export const AttributeSchemaName = 'Attribute';
+const singleAttributeSchemaHelper = {
+  type: SingleAttributeSchema,
+  required: true,
+  default: () => ({}), //uses default of subdoc
+};
 
 export const AttributeSchema = new Schema({
-  cou: SingleAttributeSchema,
-  sgc: SingleAttributeSchema,
-  int: SingleAttributeSchema,
-  cha: SingleAttributeSchema,
-  dex: SingleAttributeSchema,
-  agi: SingleAttributeSchema,
-  con: SingleAttributeSchema,
-  str: SingleAttributeSchema,
+  attributes: {
+    cou: singleAttributeSchemaHelper,
+    sgc: singleAttributeSchemaHelper,
+    int: singleAttributeSchemaHelper,
+    cha: singleAttributeSchemaHelper,
+    dex: singleAttributeSchemaHelper,
+    agi: singleAttributeSchemaHelper,
+    con: singleAttributeSchemaHelper,
+    str: singleAttributeSchemaHelper,
+  },
   total: {
     value: {
       type: Number,
+      readonly: true,
+      default: function () {
+        return Object.values(this.attributes)
+          .map((i: SingleAttribute) => i.value)
+          .reduce(add);
+      },
     },
     ap: {
       type: Number,
+      readonly: true,
+      default: function () {
+        return Object.values(this.attributes)
+          .map((i: SingleAttribute) => i.ap)
+          .reduce(add);
+      },
     },
   },
 });
+
+const add = (a: number, b: number) => a + b;

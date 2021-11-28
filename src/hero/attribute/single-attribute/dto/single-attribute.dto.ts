@@ -1,4 +1,4 @@
 export class SingleAttributeDto {
-  readonly value: number;
-  readonly ap: number;
+  readonly value?: number;
+  readonly ap?: number;
 }

@@ -1,4 +1,6 @@
-import { Schema } from "mongoose";
+import {calcApAttribute} from '@riggedcoinflip/dsa-shared';
+import {model, Schema} from 'mongoose';
+import { SingleAttribute } from '../interfaces/single-attribute.interface';
 
 export const SingleAttributeSchema = new Schema(
   {
@@ -18,9 +20,17 @@ export const SingleAttributeSchema = new Schema(
     },
     ap: {
       type: Number,
+      default: function () {
+        return calcApAttribute(this.value);
+      },
     },
   },
   {
     _id: false,
   },
+);
+
+export const SingleAttributeModel = model<SingleAttribute>(
+  'SingleAttribute',
+  SingleAttributeSchema,
 );
