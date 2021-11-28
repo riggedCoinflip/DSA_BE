@@ -61,7 +61,7 @@ export class HeroService {
     }
     const hero = await this.heroModel.findByIdAndDelete(id);
     if (!hero) {
-      throw new NotFoundException('Could not find hero.xxx');
+      throw new NotFoundException('Could not find hero.');
     }
     return hero;
   }
