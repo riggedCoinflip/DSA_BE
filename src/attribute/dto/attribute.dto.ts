@@ -1,4 +1,4 @@
-export class CreateAttributeDto {
+export class AttributeDto {
   cou: number;
   sgc: number;
   int: number;
