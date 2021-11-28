@@ -2,7 +2,7 @@ import {Module} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
 import {MongooseModule} from '@nestjs/mongoose';
 import {env} from 'process';
-import {HeroModule} from 'src/modules/hero/hero.module';
+import {HeroModule} from 'src/hero/hero.module';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 

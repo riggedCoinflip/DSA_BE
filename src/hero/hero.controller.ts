@@ -1,7 +1,15 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import {HeroDto} from './dto/hero.dto';
 import {HeroService} from './hero.service';
-import { Hero } from './interfaces/hero.interface';
+import {Hero} from './interfaces/hero.interface';
 
 @Controller('hero')
 export class HeroController {
@@ -14,7 +22,7 @@ export class HeroController {
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Hero> {
-    return this.heroService.findById(id)
+    return this.heroService.findById(id);
   }
 
   @Get()
@@ -23,12 +31,12 @@ export class HeroController {
   }
 
   @Patch(':id')
-  async updateOne(@Param('id') id:string, @Body() dto: HeroDto) {
-    return this.heroService.updateOne(id, dto)
+  async updateOne(@Param('id') id: string, @Body() dto: HeroDto) {
+    return this.heroService.updateOne(id, dto);
   }
 
   @Delete(':id')
-  async deleteOne(@Param('id') id:string) {
-    return this.heroService.deleteOne(id)
+  async deleteOne(@Param('id') id: string) {
+    return this.heroService.deleteOne(id);
   }
 }

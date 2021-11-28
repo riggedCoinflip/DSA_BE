@@ -16,4 +16,3 @@ export const HeroSchema = new Schema(
     timestamps: true,
   },
 );
-
