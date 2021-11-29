@@ -1,15 +1,20 @@
 import {calcApAttribute} from '@riggedcoinflip/dsa-shared';
 import {model, Schema} from 'mongoose';
-import { SingleAttribute } from '../interfaces/single-attribute.interface';
+import {
+  SINGLE_ATTRIBUTE_VALUE_DEFAULT,
+  SINGLE_ATTRIBUTE_VALUE_MAX,
+  SINGLE_ATTRIBUTE_VALUE_MIN,
+} from 'src/constants/single-attribute.constants';
+import {SingleAttribute} from '../interfaces/single-attribute.interface';
 
 export const SingleAttributeSchema = new Schema(
   {
     value: {
       type: Number,
       required: true,
-      default: 8,
-      min: 8,
-      max: 20,
+      default: SINGLE_ATTRIBUTE_VALUE_DEFAULT,
+      min: SINGLE_ATTRIBUTE_VALUE_MIN,
+      max: SINGLE_ATTRIBUTE_VALUE_MAX,
       validate: {
         validator: (v: number) => {
           return Number.isInteger(v);

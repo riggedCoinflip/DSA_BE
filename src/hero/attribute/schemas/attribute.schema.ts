@@ -8,37 +8,40 @@ const singleAttributeSchemaHelper = {
   default: () => ({}), //uses default of subdoc
 };
 
-export const AttributeSchema = new Schema({
-  attributes: {
-    cou: singleAttributeSchemaHelper,
-    sgc: singleAttributeSchemaHelper,
-    int: singleAttributeSchemaHelper,
-    cha: singleAttributeSchemaHelper,
-    dex: singleAttributeSchemaHelper,
-    agi: singleAttributeSchemaHelper,
-    con: singleAttributeSchemaHelper,
-    str: singleAttributeSchemaHelper,
-  },
-  total: {
-    value: {
-      type: Number,
-      readonly: true,
-      default: function () {
-        return Object.values(this.attributes)
-          .map((i: SingleAttribute) => i.value)
-          .reduce(add);
+export const AttributeSchema = new Schema(
+  {
+    attributes: {
+      cou: singleAttributeSchemaHelper,
+      sgc: singleAttributeSchemaHelper,
+      int: singleAttributeSchemaHelper,
+      cha: singleAttributeSchemaHelper,
+      dex: singleAttributeSchemaHelper,
+      agi: singleAttributeSchemaHelper,
+      con: singleAttributeSchemaHelper,
+      str: singleAttributeSchemaHelper,
+    },
+    total: {
+      value: {
+        type: Number,
+        default: function () {
+          return Object.values(this.attributes)
+            .map((i: SingleAttribute) => i.value)
+            .reduce(add);
+        },
+      },
+      ap: {
+        type: Number,
+        default: function () {
+          return Object.values(this.attributes)
+            .map((i: SingleAttribute) => i.ap)
+            .reduce(add);
+        },
       },
     },
-    ap: {
-      type: Number,
-      readonly: true,
-      default: function () {
-        return Object.values(this.attributes)
-          .map((i: SingleAttribute) => i.ap)
-          .reduce(add);
-      },
-    },
   },
-});
+  {
+    _id: false,
+  },
+);
 
 const add = (a: number, b: number) => a + b;

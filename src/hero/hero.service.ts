@@ -5,14 +5,14 @@ import {
 } from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
+import { HERO_SCHEMA_NAME } from 'src/constants/hero.constants';
 import {HeroDto} from './dto/hero.dto';
 import {Hero} from './interfaces/hero.interface';
-import {HeroSchemaName} from './schemas/hero.schema';
 
 @Injectable()
 export class HeroService {
   constructor(
-    @InjectModel(HeroSchemaName) private readonly heroModel: Model<Hero>,
+    @InjectModel(HERO_SCHEMA_NAME) private readonly heroModel: Model<Hero>,
   ) {}
 
   async create(dto: HeroDto): Promise<Hero> {

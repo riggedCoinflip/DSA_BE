@@ -7,10 +7,12 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {HeroDto} from './dto/hero.dto';
 import {HeroService} from './hero.service';
 import {Hero} from './interfaces/hero.interface';
 
+@ApiTags('hero')
 @Controller('hero')
 export class HeroController {
   constructor(private readonly heroService: HeroService) {}
