@@ -6,7 +6,7 @@ import {
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
 import { HERO_SCHEMA_NAME } from 'src/constants/hero.constants';
-import {HeroDto} from './dto/hero.dto';
+import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {Hero} from './interfaces/hero.interface';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class HeroService {
     @InjectModel(HERO_SCHEMA_NAME) private readonly heroModel: Model<Hero>,
   ) {}
 
-  async create(dto: HeroDto): Promise<Hero> {
+  async create(dto: CreateHeroRequestDto): Promise<Hero> {
     const createdHero = new this.heroModel(dto);
     return createdHero.save();
   }
@@ -38,7 +38,7 @@ export class HeroService {
     return this.heroModel.find().exec();
   }
 
-  async updateOne(id: string, data: HeroDto): Promise<Hero> {
+  async updateOne(id: string, data: CreateHeroRequestDto): Promise<Hero> {
     let hero;
     try {
       hero = await this.heroModel

@@ -1,9 +1,9 @@
-import {AttributeDto} from '../attribute/dto/attribute.dto';
+import {CreateAttributeRequestDto} from '../attribute/dto/create-attribute-request.dto';
 import {ApiProperty} from '@nestjs/swagger';
 import {IsInt, IsString, MaxLength} from 'class-validator';
 import { HERO_NAME_MAXLENGTH } from 'src/constants/hero.constants';
 
-export class HeroDto {
+export class CreateHeroRequestDto {
   @ApiProperty({
     example: 'Rick',
     description: 'Name of the hero',
@@ -14,7 +14,6 @@ export class HeroDto {
   @MaxLength(HERO_NAME_MAXLENGTH)
   readonly name?: string;
 
-
   @ApiProperty({
     example: 23,
     description: 'Age of the hero',
@@ -23,6 +22,5 @@ export class HeroDto {
   @IsInt()
   readonly age?: number;
 
-
-  readonly attribute?: AttributeDto;
+  readonly attribute?: CreateAttributeRequestDto;
 }

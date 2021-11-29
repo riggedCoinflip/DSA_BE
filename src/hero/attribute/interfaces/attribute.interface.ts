@@ -1,16 +1,16 @@
 import {Document} from 'mongoose';
-import { SingleAttributeDto } from '../single-attribute/dto/single-attribute.dto';
+import { CreateSingleAttributeRequestDto } from '../single-attribute/dto/create-single-attribute-request.dto';
 
 export interface Attribute extends Document {
   attributes: {
-    cou: SingleAttributeDto;
-    sgc: SingleAttributeDto;
-    int: SingleAttributeDto;
-    cha: SingleAttributeDto;
-    dex: SingleAttributeDto;
-    agi: SingleAttributeDto;
-    con: SingleAttributeDto;
-    str: SingleAttributeDto;
+    cou: CreateSingleAttributeRequestDto;
+    sgc: CreateSingleAttributeRequestDto;
+    int: CreateSingleAttributeRequestDto;
+    cha: CreateSingleAttributeRequestDto;
+    dex: CreateSingleAttributeRequestDto;
+    agi: CreateSingleAttributeRequestDto;
+    con: CreateSingleAttributeRequestDto;
+    str: CreateSingleAttributeRequestDto;
   };
   total: {
     value: number;

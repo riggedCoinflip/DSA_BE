@@ -3,12 +3,15 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import {HeroDto} from './dto/hero.dto';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
+import { FetchHeroResponseDto } from './dto/fetch-hero-response.dto';
 import {HeroService} from './hero.service';
 import {Hero} from './interfaces/hero.interface';
 
@@ -18,13 +21,8 @@ export class HeroController {
   constructor(private readonly heroService: HeroService) {}
 
   @Post()
-  async create(@Body() dto: HeroDto) {
+  async create(@Body() dto: CreateHeroRequestDto) {
     return this.heroService.create(dto);
-  }
-
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<Hero> {
-    return this.heroService.findById(id);
   }
 
   @Get()
@@ -32,8 +30,18 @@ export class HeroController {
     return this.heroService.findAll();
   }
 
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({type: FetchHeroResponseDto})
+  async findById(@Param('id') id: string): Promise<Hero> {
+    return this.heroService.findById(id);
+  }
+
   @Patch(':id')
-  async updateOne(@Param('id') id: string, @Body() dto: HeroDto): Promise<Hero> {
+  async updateOne(
+    @Param('id') id: string,
+    @Body() dto: CreateHeroRequestDto,
+  ): Promise<Hero> {
     return this.heroService.updateOne(id, dto);
   }
 
