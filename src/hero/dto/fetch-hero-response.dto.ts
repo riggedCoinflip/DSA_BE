@@ -1,7 +1,14 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsDate, IsInt, IsNotEmpty, IsString, MaxLength, MinLength} from 'class-validator';
-import {HERO_NAME_MAXLENGTH} from 'src/constants/hero.constants';
+import {
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import {FetchAttributeResponseDto} from '../attribute/dto/fetch-attribute-response.dto';
+import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
 export class FetchHeroResponseDto {
   @ApiProperty({

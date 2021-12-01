@@ -1,7 +1,7 @@
 import {model, Schema} from 'mongoose';
-import { HERO_NAME_MAXLENGTH } from 'src/constants/hero.constants';
-import { AttributeSchema } from '../attribute/schemas/attribute.schema';
-import { Hero } from '../interfaces/hero.interface';
+import {AttributeSchema} from '../attribute/schemas/attribute.schema';
+import { HERO_NAME_MAXLENGTH } from '../constants/hero.constants';
+import {Hero} from '../interfaces/hero.interface';
 
 export const HeroSchema = new Schema(
   {
@@ -13,7 +13,7 @@ export const HeroSchema = new Schema(
     age: {
       type: Number,
     },
-    attribute: AttributeSchema
+    attribute: AttributeSchema,
   },
   {
     timestamps: true,

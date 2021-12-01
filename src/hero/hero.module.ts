@@ -3,7 +3,7 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {HeroController} from './hero.controller';
 import {HeroSchema} from './schemas/hero.schema';
 import {HeroService} from './hero.service';
-import { HERO_SCHEMA_NAME } from 'src/constants/hero.constants';
+import {HERO_SCHEMA_NAME} from './constants/hero.constants';
 
 @Module({
   imports: [

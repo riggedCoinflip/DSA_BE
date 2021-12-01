@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
-import { HERO_SCHEMA_NAME } from 'src/constants/hero.constants';
-import { ObjectIdBadRequestException } from 'src/exceptions/object-id-bad-request.exception';
+import {HERO_SCHEMA_NAME} from './constants/hero.constants';
+import {ObjectIdBadRequestException} from 'src/exceptions/object-id-bad-request.exception';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {Hero} from './interfaces/hero.interface';
 

@@ -4,7 +4,7 @@ import {
   SINGLE_ATTRIBUTE_VALUE_DEFAULT,
   SINGLE_ATTRIBUTE_VALUE_MAX,
   SINGLE_ATTRIBUTE_VALUE_MIN,
-} from 'src/constants/single-attribute.constants';
+} from '../constants/single-attribute.constants';
 
 export class CreateSingleAttributeRequestDto {
   @ApiProperty({

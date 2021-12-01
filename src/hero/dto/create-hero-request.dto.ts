@@ -1,7 +1,7 @@
 import {CreateAttributeRequestDto} from '../attribute/dto/create-attribute-request.dto';
 import {ApiProperty} from '@nestjs/swagger';
 import {IsInt, IsString, MaxLength} from 'class-validator';
-import { HERO_NAME_MAXLENGTH } from 'src/constants/hero.constants';
+import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
 export class CreateHeroRequestDto {
   @ApiProperty({
