@@ -1,6 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsNotEmpty } from "class-validator";
-import { FetchSingleAttributeResponseDto } from "../single-attribute/dto/fetch-single-attribute-response.dto";
+import {ApiProperty} from '@nestjs/swagger';
+import {IsInt, IsNotEmpty} from 'class-validator';
+import {FetchSingleAttributeResponseDto} from '../single-attribute/dto/fetch-single-attribute-response.dto';
 
 export class FetchAttributeResponseDto {
   readonly attributes: FetchAttributes;

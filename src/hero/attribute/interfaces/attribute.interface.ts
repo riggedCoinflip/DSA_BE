@@ -1,5 +1,5 @@
 import {Document} from 'mongoose';
-import { CreateSingleAttributeRequestDto } from '../single-attribute/dto/create-single-attribute-request.dto';
+import {CreateSingleAttributeRequestDto} from '../single-attribute/dto/create-single-attribute-request.dto';
 
 export interface Attribute extends Document {
   attributes: {

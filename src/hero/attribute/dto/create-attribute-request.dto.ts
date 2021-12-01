@@ -1,4 +1,3 @@
-
 import {CreateSingleAttributeRequestDto} from '../single-attribute/dto/create-single-attribute-request.dto';
 
 export class CreateAttributeRequestDto {
@@ -15,4 +14,3 @@ class CreateAttributes {
   readonly con?: CreateSingleAttributeRequestDto;
   readonly str?: CreateSingleAttributeRequestDto;
 }
-
