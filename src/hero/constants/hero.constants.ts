@@ -6,3 +6,5 @@ export const FETCH_HERO_PARAM_ID = {
   type: String,
   description: 'MongoDB ObjectId of specific hero',
 };
+
+export const HERO_ID_NOT_FOUND = 'Hero does not exist';

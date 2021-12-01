@@ -3,14 +3,13 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiBody,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -19,7 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import {OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG} from 'src/exceptions/constants/object-id-bad-request-exception.constants';
-import {FETCH_HERO_PARAM_ID} from './constants/hero.constants';
+import {FETCH_HERO_PARAM_ID, HERO_ID_NOT_FOUND} from './constants/hero.constants';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {FetchHeroResponseDto} from './dto/fetch-hero-response.dto';
 import {HeroService} from './hero.service';
@@ -31,36 +30,48 @@ export class HeroController {
   constructor(private readonly heroService: HeroService) {}
 
   @Post()
-  @ApiCreatedResponse({type: FetchHeroResponseDto})
+  @ApiOperation({summary: 'Create a hero'})
+  @ApiCreatedResponse({
+    type: FetchHeroResponseDto,
+    description: 'created hero',
+  })
   async create(@Body() dto: CreateHeroRequestDto) {
     return this.heroService.create(dto);
   }
 
   @Get()
+  @ApiOperation({summary: 'Request a list of all heros'})
   @ApiOkResponse({
     type: FetchHeroResponseDto,
     isArray: true,
-    description: 'Returns all heroes',
+    description: 'List of all heroes',
   })
   async findAll(): Promise<Hero[]> {
     return this.heroService.findAll();
   }
 
   @Get(':id')
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({summary: 'Use the id of a hero to get that hero document'})
+  @ApiOperation({summary: 'Request the hero with the corresponding ID'})
   @ApiParam(FETCH_HERO_PARAM_ID)
   @ApiOkResponse({
     type: FetchHeroResponseDto,
-    description: 'Returns a single hero based on ID',
+    description: 'searched hero',
   })
   @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
-  @ApiNotFoundResponse({description: 'Hero does not exist'})
+  @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async findById(@Param('id') id: string): Promise<Hero> {
     return this.heroService.findById(id);
   }
 
   @Patch(':id')
+  @ApiOperation({summary: 'Update the hero with the corresponding ID'})
+  @ApiParam(FETCH_HERO_PARAM_ID)
+  @ApiOkResponse({
+    type: FetchHeroResponseDto,
+    description: 'updated hero',
+  })
+  @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
+  @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async updateOne(
     @Param('id') id: string,
     @Body() dto: CreateHeroRequestDto,
@@ -69,6 +80,14 @@ export class HeroController {
   }
 
   @Delete(':id')
+  @ApiOperation({summary: 'Delete the hero with the corresponding ID'})
+  @ApiParam(FETCH_HERO_PARAM_ID)
+  @ApiOkResponse({
+    type: FetchHeroResponseDto,
+    description: 'deleted hero',
+  })
+  @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
+  @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async deleteOne(@Param('id') id: string) {
     return this.heroService.deleteOne(id);
   }
