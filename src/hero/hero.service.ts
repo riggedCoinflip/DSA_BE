@@ -6,6 +6,7 @@ import {
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
 import { HERO_SCHEMA_NAME } from 'src/constants/hero.constants';
+import { ObjectIdBadRequestException } from 'src/exceptions/object-id-bad-request.exception';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {Hero} from './interfaces/hero.interface';
 
@@ -22,9 +23,7 @@ export class HeroService {
 
   async findById(id: string): Promise<Hero> {
     if (!Types.ObjectId.isValid(id)) {
-      throw new BadRequestException(
-        'Malformed ObjectID - has to be 24 hexadecimal chars',
-      );
+      throw new ObjectIdBadRequestException();
     }
 
     const hero = await this.heroModel.findById(id).exec();
