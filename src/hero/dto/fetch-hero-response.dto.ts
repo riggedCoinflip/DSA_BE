@@ -6,7 +6,9 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import {Type} from 'class-transformer';
 import {FetchAttributeResponseDto} from '../attribute/dto/fetch-attribute-response.dto';
 import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
@@ -29,6 +31,8 @@ export class FetchHeroResponseDto {
   @IsInt()
   readonly age?: number;
 
+  @ValidateNested()
+  @Type(() => FetchAttributeResponseDto)
   readonly attribute?: FetchAttributeResponseDto;
 
   @ApiProperty({
