@@ -8,7 +8,6 @@ import {
   Post,
 } from '@nestjs/common';
 import {
-  ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -22,6 +21,7 @@ import {
 } from './constants/hero.constants';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {FetchHeroResponseDto} from './dto/fetch-hero-response.dto';
+import { UpdateHeroRequestDto } from './dto/update-hero-request.dto';
 import {HeroService} from './hero.service';
 import {Hero} from './interfaces/hero.interface';
 
@@ -73,7 +73,7 @@ export class HeroController {
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async updateOne(
     @Param('id') id: string,
-    @Body() dto: CreateHeroRequestDto,
+    @Body() dto: UpdateHeroRequestDto,
   ): Promise<Hero> {
     return this.heroService.updateOne(id, dto);
   }
