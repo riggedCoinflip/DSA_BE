@@ -20,4 +20,11 @@ export const HeroSchema = new Schema(
   },
 );
 
+HeroSchema.pre('findOneAndUpdate', async function (next) {
+  console.log('Updating Hero');
+  //const docToUpdate = await this.model.findOne(this.getQuery());
+  //console.log(docToUpdate)
+  next()
+});
+
 export const HeroModel = model<Hero>('Hero', HeroSchema);

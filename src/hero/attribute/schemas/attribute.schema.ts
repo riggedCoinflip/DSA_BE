@@ -1,4 +1,5 @@
-import {Schema} from 'mongoose';
+import {model, Schema} from 'mongoose';
+import { Attribute } from '../interfaces/attribute.interface';
 import {SingleAttribute} from '../single-attribute/interfaces/single-attribute.interface';
 import {SingleAttributeSchema} from '../single-attribute/schemas/single-attribute.schema';
 
@@ -45,3 +46,8 @@ export const AttributeSchema = new Schema(
 );
 
 const add = (a: number, b: number) => a + b;
+
+export const AttributeModel = model<Attribute>(
+  'Attribute',
+  AttributeSchema,
+);
