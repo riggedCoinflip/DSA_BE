@@ -16,7 +16,6 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import {OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG} from 'src/exceptions/constants/object-id-bad-request-exception.constants';
 import {
   FETCH_HERO_PARAM_ID,
   HERO_ID_NOT_FOUND,
@@ -59,7 +58,6 @@ export class HeroController {
     type: FetchHeroResponseDto,
     description: 'searched hero',
   })
-  @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async findById(@Param('id') id: string): Promise<Hero> {
     return this.heroService.findById(id);
@@ -72,7 +70,6 @@ export class HeroController {
     type: FetchHeroResponseDto,
     description: 'updated hero',
   })
-  @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async updateOne(
     @Param('id') id: string,
@@ -88,7 +85,6 @@ export class HeroController {
     type: FetchHeroResponseDto,
     description: 'deleted hero',
   })
-  @ApiBadRequestResponse({description: OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG})
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async deleteOne(@Param('id') id: string) {
     return this.heroService.deleteOne(id);

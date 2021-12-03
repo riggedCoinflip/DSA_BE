@@ -5,8 +5,7 @@ import {
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
 import {HERO_SCHEMA_NAME} from './constants/hero.constants';
-import {flatten} from 'flat'
-import {ObjectIdBadRequestException} from 'src/exceptions/object-id-bad-request.exception';
+import {flatten} from 'flat';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {Hero} from './interfaces/hero.interface';
 
@@ -22,13 +21,14 @@ export class HeroService {
   }
 
   async findById(id: string): Promise<Hero> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new ObjectIdBadRequestException();
+    let hero
+    try {
+      hero = await this.heroModel.findById(id).exec();
+    } catch (e) {
+      throw new NotFoundException();
     }
-
-    const hero = await this.heroModel.findById(id).exec();
     if (!hero) {
-      throw new NotFoundException('Could not find hero.');
+      throw new NotFoundException();
     }
     return hero;
   }
