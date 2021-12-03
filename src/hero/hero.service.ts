@@ -45,7 +45,7 @@ export class HeroService {
       hero = await this.heroModel
         .findByIdAndUpdate(
           id, 
-          {$set: {flattenedData}},
+          {$set: flattenedData},
           {
           new: true,
         })
