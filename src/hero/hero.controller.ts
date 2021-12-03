@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
-  ApiBody,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -18,7 +17,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import {OBJECT_ID_BAD_REQUEST_EXCEPTION_MSG} from 'src/exceptions/constants/object-id-bad-request-exception.constants';
-import {FETCH_HERO_PARAM_ID, HERO_ID_NOT_FOUND} from './constants/hero.constants';
+import {
+  FETCH_HERO_PARAM_ID,
+  HERO_ID_NOT_FOUND,
+} from './constants/hero.constants';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {FetchHeroResponseDto} from './dto/fetch-hero-response.dto';
 import {HeroService} from './hero.service';
