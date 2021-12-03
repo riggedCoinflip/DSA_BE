@@ -1,6 +1,6 @@
 import {CreateAttributeRequestDto} from '../attribute/dto/create-attribute-request.dto';
 import {ApiProperty} from '@nestjs/swagger';
-import {IsInt, IsString, MaxLength, ValidateNested} from 'class-validator';
+import {IsInt, IsOptional, IsString, MaxLength, ValidateNested} from 'class-validator';
 import {Type} from 'class-transformer';
 import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
@@ -11,6 +11,7 @@ export class CreateHeroRequestDto {
     format: 'string',
     maxLength: HERO_NAME_MAXLENGTH,
   })
+  @IsOptional()
   @IsString()
   @MaxLength(HERO_NAME_MAXLENGTH)
   readonly name?: string;
@@ -20,6 +21,7 @@ export class CreateHeroRequestDto {
     description: 'Age of the hero',
     format: 'integer',
   })
+  @IsOptional()
   @IsInt()
   readonly age?: number;
 

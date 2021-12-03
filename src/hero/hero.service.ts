@@ -5,6 +5,7 @@ import {
 import {InjectModel} from '@nestjs/mongoose';
 import {Model, Types} from 'mongoose';
 import {HERO_SCHEMA_NAME} from './constants/hero.constants';
+import {flatten} from 'flat'
 import {ObjectIdBadRequestException} from 'src/exceptions/object-id-bad-request.exception';
 import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
 import {Hero} from './interfaces/hero.interface';
@@ -15,8 +16,8 @@ export class HeroService {
     @InjectModel(HERO_SCHEMA_NAME) private readonly heroModel: Model<Hero>,
   ) {}
 
-  async create(dto: CreateHeroRequestDto): Promise<Hero> {
-    const createdHero = new this.heroModel(dto);
+  async create(data: CreateHeroRequestDto): Promise<Hero> {
+    const createdHero = new this.heroModel(data);
     return createdHero.save();
   }
 
@@ -37,10 +38,15 @@ export class HeroService {
   }
 
   async updateOne(id: string, data: CreateHeroRequestDto): Promise<Hero> {
+    const flattenedData = flatten(data)
+    
     let hero;
     try {
       hero = await this.heroModel
-        .findByIdAndUpdate(id, data, {
+        .findByIdAndUpdate(
+          id, 
+          {$set: {flattenedData}},
+          {
           new: true,
         })
         .exec();

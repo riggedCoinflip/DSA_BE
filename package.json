@@ -33,6 +33,7 @@
     "@nestjs/swagger": "^5.1.5",
     "@riggedcoinflip/dsa-shared": "^3.0.0",
     "class-validator": "^0.13.2",
+    "flat": "^5.0.2",
     "mongoose": "^6.0.13",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
