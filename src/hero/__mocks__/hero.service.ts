@@ -1,9 +1,9 @@
-import { heroStub } from "../test/stubs/hero.stub";
+import {heroStub} from "../test/stubs/hero.stub";
 
 export const HeroService = jest.fn().mockReturnValue({
-  findById: jest.fn().mockResolvedValue(heroStub()),
-  findAll: jest.fn().mockResolvedValue([heroStub()]),
-  create: jest.fn().mockResolvedValue(heroStub()),
-  updateOne: jest.fn().mockResolvedValue(heroStub()),
-  deleteOne: jest.fn().mockResolvedValue(heroStub()),
+  getHeroById: jest.fn().mockResolvedValue(heroStub()),
+  getHeroes: jest.fn().mockResolvedValue([heroStub()]),
+  createHero: jest.fn().mockResolvedValue(heroStub()),
+  updateHero: jest.fn().mockResolvedValue(heroStub()),
+  deleteHero: jest.fn().mockResolvedValue(true),
 });

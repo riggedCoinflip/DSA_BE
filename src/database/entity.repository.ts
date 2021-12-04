@@ -49,11 +49,4 @@ export abstract class EntityRepository<T extends Document> {
       .exec();
     return deleteResult.deletedCount >= 1;
   }
-
-  async deleteOne(entityFilterQuery: FilterQuery<T>): Promise<boolean> {
-    const deleteResult = await this.entityModel
-      .deleteOne(entityFilterQuery)
-      .exec();
-    return deleteResult.deletedCount == 1;
-  }
 }

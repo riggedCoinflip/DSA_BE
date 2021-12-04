@@ -29,8 +29,8 @@ export class HeroService {
     return this.heroRepository.find({});
   }
 
-  async createUser(heroUpdate: CreateHeroDto): Promise<Hero> {
-    return this.heroRepository.create(heroUpdate);
+  async createHero(heroCreate: CreateHeroDto): Promise<Hero> {
+    return this.heroRepository.create(heroCreate);
   }
 
   async updateHero(id: string, heroUpdate: UpdateHeroRequestDto): Promise<Hero> {
@@ -51,10 +51,10 @@ export class HeroService {
     return hero;
   }
 
-  async deleteOne(id: string): Promise<boolean> {
-    let isDeleted;
+  async deleteHero(id: string): Promise<boolean> {
+    let isDeleted: boolean;
     try {
-      isDeleted = await this.heroRepository.deleteOne({id});
+      isDeleted = await this.heroRepository.deleteMany({id});
     } catch (e) {
       throw new NotFoundException();
     }

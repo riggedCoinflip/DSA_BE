@@ -38,7 +38,7 @@ export class HeroController {
     description: 'searched hero',
   })
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
-  async findById(@Param('id') id: string): Promise<Hero> {
+  async getHeroById(@Param('id') id: string): Promise<Hero> {
     return this.heroService.getHeroById(id);
   }
 
@@ -49,7 +49,7 @@ export class HeroController {
     isArray: true,
     description: 'List of all heroes',
   })
-  async findAll(): Promise<Hero[]> {
+  async getHeroes(): Promise<Hero[]> {
     return this.heroService.getHeroes();
   }
 
@@ -59,8 +59,8 @@ export class HeroController {
     type: FetchHeroResponseDto,
     description: 'created hero',
   })
-  async create(@Body() dto: CreateHeroDto) {
-    return this.heroService.createUser(dto);
+  async createHero(@Body() dto: CreateHeroDto) {
+    return this.heroService.createHero(dto);
   }
 
   @Patch(':id')
@@ -71,7 +71,7 @@ export class HeroController {
     description: 'updated hero',
   })
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
-  async updateOne(
+  async updateHero(
     @Param('id') id: string,
     @Body() dto: UpdateHeroRequestDto,
   ): Promise<Hero> {
@@ -86,7 +86,7 @@ export class HeroController {
     description: 'deleted hero',
   })
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
-  async deleteOne(@Param('id') id: string) {
-    return this.heroService.deleteOne(id);
+  async deleteHero(@Param('id') id: string) {
+    return this.heroService.deleteHero(id);
   }
 }

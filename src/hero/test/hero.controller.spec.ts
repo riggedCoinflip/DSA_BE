@@ -1,9 +1,9 @@
 import {Test} from '@nestjs/testing';
-import { CreateHeroRequestDto } from '../dto/create-hero-request.dto';
-import { UpdateHeroRequestDto } from '../dto/update-hero-request.dto';
+import { CreateHeroDto } from '../dto/create-hero.dto';
+import { UpdateHeroRequestDto } from '../dto/update-hero.dto';
 import {HeroController} from '../hero.controller';
 import {HeroService} from '../hero.service';
-import { Hero } from '../interfaces/hero.interface';
+import { Hero } from '../schemas/hero.schema';
 import { heroCreateStub, heroStub, heroUpdateStub } from './stubs/hero.stub';
 
 jest.mock('../hero.service')
@@ -14,7 +14,6 @@ describe('HeroController', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [],
       controllers: [HeroController],
       providers: [HeroService],
     }).compile();
@@ -24,34 +23,34 @@ describe('HeroController', () => {
     jest.clearAllMocks()
   });
 
-  describe('findById', () => {
-    describe('when findById is called', () => {
-      let hero: Hero
+  describe('getHeroById', () => {
+    describe('when getHeroById is called', () => {
+      let hero: Hero;
 
       beforeEach(async () => {
-        hero = await heroController.findById(heroStub()._id)
-      })
-
-      test('then it should call heroService', () => {
-        expect(heroService.findById).toBeCalledWith(heroStub()._id);
-      })
-
-      test('then it should return a hero', () => {
-        expect(hero).toEqual(heroStub())
-      })
-    })
-  })
-
-  describe('findAll', () => {
-    describe('when findAll is called', () => {
-      let heroes: Hero[];
-
-      beforeEach(async () => {
-        heroes = await heroController.findAll();
+        hero = await heroController.getHeroById(heroStub()._id);
       });
 
       test('then it should call heroService', () => {
-        expect(heroService.findAll).toBeCalledWith();
+        expect(heroService.getHeroById).toBeCalledWith(heroStub()._id);
+      });
+
+      test('then it should return a hero', () => {
+        expect(hero).toEqual(heroStub());
+      });
+    });
+  })
+
+  describe('getHeroes', () => {
+    describe('when getHeroes is called', () => {
+      let heroes: Hero[];
+
+      beforeEach(async () => {
+        heroes = await heroController.getHeroes();
+      });
+
+      test('then it should call heroService', () => {
+        expect(heroService.getHeroes).toBeCalledWith();
       });
 
       test('then it should return all heroes', () => {
@@ -60,63 +59,63 @@ describe('HeroController', () => {
     });
   });
 
-  describe('create', () => {
-    describe('when create is called', () => {
+  describe('createHero', () => {
+    describe('when createHero is called', () => {
       let hero: Hero;
-      let createHeroRequestDto: CreateHeroRequestDto
+      let createHeroRequestDto: CreateHeroDto
 
       beforeEach(async () => {
         createHeroRequestDto = heroCreateStub()
-        hero = await heroController.create(heroCreateStub());
+        hero = await heroController.createHero(heroCreateStub());
       });
 
       test('then it should call heroService', () => {
-        expect(heroService.create).toBeCalledWith(createHeroRequestDto);
+        expect(heroService.createHero).toBeCalledWith(createHeroRequestDto);
       });
 
-      test('then it should return the created hero', () => {
+      test('then it should return a hero', () => {
         expect(hero).toEqual(heroStub());
       });
     });
   });
 
-  describe('updateOne', () => {
-    describe('when updateOne is called', () => {
+  describe('updateHero', () => {
+    describe('when updateHero is called', () => {
       let hero: Hero;
       let updateHeroRequestDto: UpdateHeroRequestDto;
 
       beforeEach(async () => {
         updateHeroRequestDto = heroUpdateStub()
-        hero = await heroController.updateOne(heroStub()._id, updateHeroRequestDto);
+        hero = await heroController.updateHero(heroStub()._id, updateHeroRequestDto);
       });
 
       test('then it should call heroService', () => {
-        expect(heroService.updateOne).toBeCalledWith(
+        expect(heroService.updateHero).toBeCalledWith(
           heroStub()._id,
           updateHeroRequestDto,
         );
       });
 
-      test('then it should return the updated hero', () => {
+      test('then it should return a hero', () => {
         expect(hero).toEqual(heroStub());
       });
     });
   });
 
-  describe('deleteOne', () => {
-    describe('when deleteOne is called', () => {
-      let hero: Hero;
+  describe('deleteHero', () => {
+    describe('when deleteHero is called', () => {
+      let isDeleteSuccessful: boolean
 
       beforeEach(async () => {
-        hero = await heroController.deleteOne(heroStub()._id);
+        isDeleteSuccessful = await heroController.deleteHero(heroStub()._id);
       });
 
       test('then it should call heroService', () => {
-        expect(heroService.deleteOne).toBeCalledWith(heroStub()._id);
+        expect(heroService.deleteHero).toBeCalledWith(heroStub()._id);
       });
 
-      test('then it should return the deleted hero', () => {
-        expect(hero).toEqual(heroStub());
+      test('then it should return true', () => {
+        expect(isDeleteSuccessful).toEqual(true);
       });
     });
   });
