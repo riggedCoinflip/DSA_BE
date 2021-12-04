@@ -1,15 +1,13 @@
 import {Module} from '@nestjs/common';
 import {MongooseModule} from '@nestjs/mongoose';
 import {HeroController} from './hero.controller';
-import {HeroSchema} from './schemas/hero.schema';
+import {Hero, HeroSchema} from './schemas/hero.schema';
 import {HeroService} from './hero.service';
-import {HERO_SCHEMA_NAME} from './constants/hero.constants';
+import { HeroRepository } from './hero.repository';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{name: HERO_SCHEMA_NAME, schema: HeroSchema}]),
-  ],
+  imports: [MongooseModule.forFeature([{name: Hero.name, schema: HeroSchema}])],
   controllers: [HeroController],
-  providers: [HeroService],
+  providers: [HeroService, HeroRepository],
 })
 export class HeroModule {}

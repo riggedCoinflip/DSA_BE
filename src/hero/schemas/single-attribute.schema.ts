@@ -1,12 +1,26 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {Document} from 'mongoose'
 import {calcApAttribute} from '@riggedcoinflip/dsa-shared';
-import {model, Schema} from 'mongoose';
 import {
   SINGLE_ATTRIBUTE_VALUE_DEFAULT,
   SINGLE_ATTRIBUTE_VALUE_MAX,
   SINGLE_ATTRIBUTE_VALUE_MIN,
 } from '../constants/single-attribute.constants';
-import {SingleAttribute} from '../interfaces/single-attribute.interface';
 
+export type SingleAttributeDocument = SingleAttribute & Document;
+
+@Schema()
+export class SingleAttribute {
+  @Prop()
+  value: number;
+
+  @Prop()
+  ap: number;
+}
+
+export const SingleAttributeSchema = SchemaFactory.createForClass(SingleAttribute)
+
+/*
 export const SingleAttributeSchema = new Schema(
   {
     value: {
@@ -39,3 +53,5 @@ export const SingleAttributeModel = model<SingleAttribute>(
   'SingleAttribute',
   SingleAttributeSchema,
 );
+
+*/

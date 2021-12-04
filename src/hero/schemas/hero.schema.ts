@@ -1,8 +1,37 @@
-import {model, Schema} from 'mongoose';
-import {AttributeSchema} from '../attribute/schemas/attribute.schema';
-import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
-import {Hero} from '../interfaces/hero.interface';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import {Document} from 'mongoose'
+import { Attribute, AttributeSchema } from "./attribute.schema";
 
+export type HeroDocument = Hero & Document;
+
+@Schema()
+export class Hero {
+  @Prop()
+  name: String;
+
+  @Prop()
+  age: number;
+
+  @Prop({type: AttributeSchema})
+  attribute: Attribute;
+}
+
+const schema = SchemaFactory.createForClass(Hero);
+
+/*
+schema.pre<HeroDocument>('findOneAndUpdate', async function (next) {
+  console.log('Updating Hero');
+  //const docToUpdate = await this.model.findOne(this.getQuery());
+  //console.log(docToUpdate)
+  next();
+});
+*/
+
+export const HeroSchema = schema
+
+
+
+/*
 export const HeroSchema = new Schema(
   {
     name: {
@@ -27,4 +56,6 @@ HeroSchema.pre('findOneAndUpdate', async function (next) {
   next()
 });
 
-export const HeroModel = model<Hero>('Hero', HeroSchema);
+
+export const HeroModel = model<Hero>(HERO_SCHEMA_NAME, HeroSchema);
+*/

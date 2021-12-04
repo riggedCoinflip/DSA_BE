@@ -19,37 +19,16 @@ import {
   FETCH_HERO_PARAM_ID,
   HERO_ID_NOT_FOUND,
 } from './constants/hero.constants';
-import {CreateHeroRequestDto} from './dto/create-hero-request.dto';
+import {CreateHeroDto} from './dto/create-hero.dto';
 import {FetchHeroResponseDto} from './dto/fetch-hero-response.dto';
-import { UpdateHeroRequestDto } from './dto/update-hero-request.dto';
+import { UpdateHeroRequestDto } from './dto/update-hero.dto';
 import {HeroService} from './hero.service';
-import {Hero} from './interfaces/hero.interface';
+import { Hero } from './schemas/hero.schema';
 
 @ApiTags('hero')
 @Controller('hero')
 export class HeroController {
   constructor(private readonly heroService: HeroService) {}
-
-  @Post()
-  @ApiOperation({summary: 'Create a hero'})
-  @ApiCreatedResponse({
-    type: FetchHeroResponseDto,
-    description: 'created hero',
-  })
-  async create(@Body() dto: CreateHeroRequestDto) {
-    return this.heroService.create(dto);
-  }
-
-  @Get()
-  @ApiOperation({summary: 'Request a list of all heros'})
-  @ApiOkResponse({
-    type: FetchHeroResponseDto,
-    isArray: true,
-    description: 'List of all heroes',
-  })
-  async findAll(): Promise<Hero[]> {
-    return this.heroService.findAll();
-  }
 
   @Get(':id')
   @ApiOperation({summary: 'Request the hero with the corresponding ID'})
@@ -60,7 +39,28 @@ export class HeroController {
   })
   @ApiNotFoundResponse({description: HERO_ID_NOT_FOUND})
   async findById(@Param('id') id: string): Promise<Hero> {
-    return this.heroService.findById(id);
+    return this.heroService.getHeroById(id);
+  }
+
+  @Get()
+  @ApiOperation({summary: 'Request a list of all heros'})
+  @ApiOkResponse({
+    type: FetchHeroResponseDto,
+    isArray: true,
+    description: 'List of all heroes',
+  })
+  async findAll(): Promise<Hero[]> {
+    return this.heroService.getHeroes();
+  }
+
+  @Post()
+  @ApiOperation({summary: 'Create a hero'})
+  @ApiCreatedResponse({
+    type: FetchHeroResponseDto,
+    description: 'created hero',
+  })
+  async create(@Body() dto: CreateHeroDto) {
+    return this.heroService.createUser(dto);
   }
 
   @Patch(':id')
@@ -75,7 +75,7 @@ export class HeroController {
     @Param('id') id: string,
     @Body() dto: UpdateHeroRequestDto,
   ): Promise<Hero> {
-    return this.heroService.updateOne(id, dto);
+    return this.heroService.updateHero(id, dto);
   }
 
   @Delete(':id')

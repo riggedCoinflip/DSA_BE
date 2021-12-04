@@ -1,9 +1,9 @@
 import {ApiProperty} from '@nestjs/swagger';
 import {IsInt, IsNotEmpty, ValidateNested} from 'class-validator';
 import {Type} from 'class-transformer';
-import {FetchSingleAttributeResponseDto} from '../single-attribute/dto/fetch-single-attribute-response.dto';
+import {FetchSingleAttributeResponseDto} from '../single-attribute/fetch-single-attribute-response.dto';
 
-class FetchAttributes {
+export class FetchAttributeResponseDto {
   @ValidateNested()
   @Type(() => FetchSingleAttributeResponseDto)
   readonly cou: FetchSingleAttributeResponseDto;
@@ -35,9 +35,7 @@ class FetchAttributes {
   @ValidateNested()
   @Type(() => FetchSingleAttributeResponseDto)
   readonly str: FetchSingleAttributeResponseDto;
-}
 
-class Total {
   @ApiProperty({
     example: 80,
     description: 'GENERATED. Sum of all values of the 8 attributes',
@@ -46,7 +44,7 @@ class Total {
   })
   @IsInt()
   @IsNotEmpty()
-  readonly value: number;
+  readonly totalValue: number;
 
   @ApiProperty({
     example: 240,
@@ -56,15 +54,5 @@ class Total {
   })
   @IsInt()
   @IsNotEmpty()
-  readonly ap: number;
-}
-
-export class FetchAttributeResponseDto {
-  @ValidateNested()
-  @Type(() => FetchAttributes)
-  readonly attributes: FetchAttributes;
-
-  @ValidateNested()
-  @Type(() => Total)
-  readonly total: Total;
+  readonly totalAp: number;
 }

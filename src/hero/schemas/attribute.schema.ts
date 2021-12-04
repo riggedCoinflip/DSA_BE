@@ -1,8 +1,46 @@
-import {model, Schema} from 'mongoose';
-import { Attribute } from '../interfaces/attribute.interface';
-import {SingleAttribute} from '../single-attribute/interfaces/single-attribute.interface';
-import {SingleAttributeSchema} from '../single-attribute/schemas/single-attribute.schema';
+import {Prop, raw, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {Document} from 'mongoose';
 
+import {SingleAttribute, SingleAttributeSchema} from './single-attribute.schema';
+
+export type AttributeDocument = Attribute & Document
+
+@Schema()
+export class Attribute {
+  @Prop({type: SingleAttributeSchema})
+  cou: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  sgc: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  int: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  cha: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  dex: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  agi: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  con: SingleAttribute;
+
+  @Prop({type: SingleAttributeSchema})
+  str: SingleAttribute;
+
+  @Prop()
+  totalValue: number
+
+  @Prop()
+  totalAp: number
+}
+
+export const AttributeSchema = SchemaFactory.createForClass(Attribute)
+
+/*
 const singleAttributeSchemaHelper = {
   type: SingleAttributeSchema,
   required: true,
@@ -47,7 +85,5 @@ export const AttributeSchema = new Schema(
 
 const add = (a: number, b: number) => a + b;
 
-export const AttributeModel = model<Attribute>(
-  'Attribute',
-  AttributeSchema,
-);
+export const AttributeModel = model<Attribute>('Attribute', AttributeSchema);
+*/

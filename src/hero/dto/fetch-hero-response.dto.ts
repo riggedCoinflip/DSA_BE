@@ -9,7 +9,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import {Type} from 'class-transformer';
-import {FetchAttributeResponseDto} from '../attribute/dto/fetch-attribute-response.dto';
+import {FetchAttributeResponseDto} from './attribute/fetch-attribute-response.dto';
 import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
 export class FetchHeroResponseDto {

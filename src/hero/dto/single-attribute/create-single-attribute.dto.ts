@@ -4,9 +4,9 @@ import {
   SINGLE_ATTRIBUTE_VALUE_DEFAULT,
   SINGLE_ATTRIBUTE_VALUE_MAX,
   SINGLE_ATTRIBUTE_VALUE_MIN,
-} from '../constants/single-attribute.constants';
+} from '../../constants/single-attribute.constants';
 
-export class FetchSingleAttributeResponseDto {
+export class CreateSingleAttributeDto {
   @ApiProperty({
     example: 10,
     description: 'Attribute Value',
@@ -21,14 +21,4 @@ export class FetchSingleAttributeResponseDto {
   @Min(SINGLE_ATTRIBUTE_VALUE_MIN)
   @Max(SINGLE_ATTRIBUTE_VALUE_MAX)
   readonly value: number = SINGLE_ATTRIBUTE_VALUE_DEFAULT;
-
-  @ApiProperty({
-    example: 30,
-    description: 'GENERATED. Cost of the attribute.',
-    format: 'integer',
-    required: true,
-  })
-  @IsInt()
-  @IsNotEmpty()
-  readonly ap: number;
 }
