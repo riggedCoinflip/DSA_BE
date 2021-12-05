@@ -5,5 +5,5 @@ export const HeroService = jest.fn().mockReturnValue({
   getHeroes: jest.fn().mockResolvedValue([heroStub()]),
   createHero: jest.fn().mockResolvedValue(heroStub()),
   updateHero: jest.fn().mockResolvedValue(heroStub()),
-  deleteHero: jest.fn().mockResolvedValue(true),
+  deleteHero: jest.fn().mockResolvedValue(null),
 });
