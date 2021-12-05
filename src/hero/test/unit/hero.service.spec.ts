@@ -1,11 +1,11 @@
 import {Test} from '@nestjs/testing';
 import {flatten} from 'flat';
-import {HeroRepository} from '../hero.repository';
-import {HeroService} from '../hero.service';
-import {Hero} from '../schemas/hero.schema';
-import {heroCreateStub, heroStub} from './stubs/hero.stub';
+import {HeroRepository} from '../../hero.repository';
+import {HeroService} from '../../hero.service';
+import {Hero} from '../../schemas/hero.schema';
+import {heroCreateStub, heroStub} from '../stubs/hero.stub';
 
-jest.mock('../hero.repository');
+jest.mock('../../hero.repository');
 
 describe('HeroService', () => {
   let heroService: HeroService;
@@ -109,8 +109,8 @@ describe('HeroService', () => {
         expect(heroRepository.deleteMany).toBeCalledWith({id: heroStub()._id});
       });
 
-      test('then it should return isDeleted', () => {
-        expect(isDeleted).toEqual(true);
+      test('then it should return nothing', () => {
+        expect(isDeleted).toBeNull();
       });
     });
   });

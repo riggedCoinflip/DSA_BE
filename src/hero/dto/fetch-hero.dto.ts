@@ -9,10 +9,10 @@ import {
   ValidateNested,
 } from 'class-validator';
 import {Type} from 'class-transformer';
-import {FetchAttributeResponseDto} from './attribute/fetch-attribute-response.dto';
+import {FetchAttributeDto} from './attribute/fetch-attribute.dto';
 import {HERO_NAME_MAXLENGTH} from '../constants/hero.constants';
 
-export class FetchHeroResponseDto {
+export class FetchHeroDto {
   @ApiProperty({
     example: 'Rick',
     description: 'Name of the hero',
@@ -32,8 +32,8 @@ export class FetchHeroResponseDto {
   readonly age?: number;
 
   @ValidateNested()
-  @Type(() => FetchAttributeResponseDto)
-  readonly attribute?: FetchAttributeResponseDto;
+  @Type(() => FetchAttributeDto)
+  readonly attribute?: FetchAttributeDto;
 
   @ApiProperty({
     example: '1234567890abcdef12345678',

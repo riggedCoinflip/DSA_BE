@@ -2,7 +2,7 @@ import {ValidateNested} from 'class-validator';
 import {Type} from 'class-transformer';
 import {CreateSingleAttributeDto} from '../single-attribute/create-single-attribute.dto';
 
-export class CreateAttributeRequestDto {
+export class CreateAttributeDto {
   @ValidateNested()
   @Type(() => CreateSingleAttributeDto)
   readonly cou?: CreateSingleAttributeDto;

@@ -1,10 +1,10 @@
 import {getModelToken} from '@nestjs/mongoose';
 import {Test} from '@nestjs/testing';
 import {FilterQuery} from 'mongoose';
-import {HeroRepository} from '../hero.repository';
-import {Hero, HeroDocument} from '../schemas/hero.schema';
-import {heroCreateStub, heroStub} from './stubs/hero.stub';
-import {HeroModel} from './support/hero.model';
+import {HeroRepository} from '../../hero.repository';
+import {Hero, HeroDocument} from '../../schemas/hero.schema';
+import {heroCreateStub, heroStub} from '../stubs/hero.stub';
+import {HeroModel} from '../support/hero.model';
 
 describe('HeroRepository', () => {
   let heroRepository: HeroRepository;
@@ -43,10 +43,7 @@ describe('HeroRepository', () => {
         });
 
         test('then it should call the heroModel', () => {
-          expect(heroModel.findOne).toHaveBeenCalledWith(heroFilterQuery, {
-            _id: 0,
-            __v: 0,
-          });
+          expect(heroModel.findOne).toHaveBeenCalledWith(heroFilterQuery, {});
         });
 
         test('then it should return a hero', () => {
@@ -133,7 +130,7 @@ describe('HeroRepository', () => {
           expect(heroModel.deleteMany).toHaveBeenCalledWith(heroFilterQuery);
         });
 
-        test('then it should return that a hero got deleted', () => {
+        test('then it should return true', () => {
           expect(isDeleted).toBe(true);
         });
       });

@@ -4,7 +4,7 @@ import {
 } from '@nestjs/common';
 import {flatten} from 'flat';
 import {CreateHeroDto} from './dto/create-hero.dto';
-import { UpdateHeroRequestDto } from './dto/update-hero.dto';
+import { UpdateHeroDto } from './dto/update-hero.dto';
 import { HeroRepository } from './hero.repository';
 import { Hero } from './schemas/hero.schema';
 
@@ -33,7 +33,7 @@ export class HeroService {
     return this.heroRepository.create(heroCreate);
   }
 
-  async updateHero(id: string, heroUpdate: UpdateHeroRequestDto): Promise<Hero> {
+  async updateHero(id: string, heroUpdate: UpdateHeroDto): Promise<Hero> {
     const flattenedData = flatten(heroUpdate);
 
     let hero;
@@ -61,6 +61,6 @@ export class HeroService {
     if (!isDeleted) {
       throw new NotFoundException();
     }
-    return isDeleted;
+    return null;
   }
 }

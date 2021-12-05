@@ -1,4 +1,4 @@
-import {CreateAttributeRequestDto} from './attribute/create-attributes.dto';
+import {CreateAttributeDto} from './attribute/create-attribute.dto';
 import {ApiProperty} from '@nestjs/swagger';
 import {IsInt, IsOptional, IsString, MaxLength, ValidateNested} from 'class-validator';
 import {Type} from 'class-transformer';
@@ -26,6 +26,6 @@ export class CreateHeroDto {
   readonly age?: number;
 
   @ValidateNested()
-  @Type(() => CreateAttributeRequestDto)
-  readonly attribute?: CreateAttributeRequestDto;
+  @Type(() => CreateAttributeDto)
+  readonly attribute?: CreateAttributeDto;
 }

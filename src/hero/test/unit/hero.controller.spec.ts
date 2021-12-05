@@ -1,12 +1,12 @@
 import {Test} from '@nestjs/testing';
-import { CreateHeroDto } from '../dto/create-hero.dto';
-import { UpdateHeroRequestDto } from '../dto/update-hero.dto';
-import {HeroController} from '../hero.controller';
-import {HeroService} from '../hero.service';
-import { Hero } from '../schemas/hero.schema';
-import { heroCreateStub, heroStub, heroUpdateStub } from './stubs/hero.stub';
+import { CreateHeroDto } from '../../dto/create-hero.dto';
+import { UpdateHeroDto } from '../../dto/update-hero.dto';
+import {HeroController} from '../../hero.controller';
+import {HeroService} from '../../hero.service';
+import { Hero } from '../../schemas/hero.schema';
+import { heroCreateStub, heroStub, heroUpdateStub } from '../stubs/hero.stub';
 
-jest.mock('../hero.service')
+jest.mock('../../hero.service')
 
 describe('HeroController', () => {
   let heroService: HeroService;
@@ -82,7 +82,7 @@ describe('HeroController', () => {
   describe('updateHero', () => {
     describe('when updateHero is called', () => {
       let hero: Hero;
-      let updateHeroRequestDto: UpdateHeroRequestDto;
+      let updateHeroRequestDto: UpdateHeroDto;
 
       beforeEach(async () => {
         updateHeroRequestDto = heroUpdateStub()
@@ -114,8 +114,8 @@ describe('HeroController', () => {
         expect(heroService.deleteHero).toBeCalledWith(heroStub()._id);
       });
 
-      test('then it should return true', () => {
-        expect(isDeleteSuccessful).toEqual(true);
+      test('then it should return null', () => {
+        expect(isDeleteSuccessful).toBeNull();
       });
     });
   });

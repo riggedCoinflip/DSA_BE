@@ -6,7 +6,7 @@ import {
   SINGLE_ATTRIBUTE_VALUE_MIN,
 } from '../../constants/single-attribute.constants';
 
-export class FetchSingleAttributeResponseDto {
+export class FetchSingleAttributeDto {
   @ApiProperty({
     example: 10,
     description: 'Attribute Value',
